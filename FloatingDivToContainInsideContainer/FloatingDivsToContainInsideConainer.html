@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parent div to fully stretch to contain its floating child divs</title>
+    <link href="../main.css" rel="stylesheet" />
+</head>
+<body>
+<h1>Floating Divs to fully contain inside its container</h1>
+<h2>Example of inside divs fully contain inside its parent and parent div fully stretched to put inside divs inside it.</h2>
+<p>We have a situation where parent div should fully stretched to put its floating divs inside it and height of parent div to be the height of max height of its child div.</p>
+
+<p>Lets make an html for this which would look like below.</p>
+
+<pre class="jsCode">
+&lt;div class="main"&gt;
+    &lt;div class="left"&gt;Left&lt;/div&gt;
+    &lt;div class="right"&gt;Right&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p>Now lets make a css for this.</p>
+
+<pre class="jsCode">
+.main {
+    width: 100%;
+    background-color: red;
+}
+
+.main .left {
+    float : left;
+    background-color: green;
+    width: 40%;
+}
+
+.main .right {
+    float:right;
+    background-color: blue;
+    width: 40%;
+}
+</pre>
+
+<p>Result of the above html and css would be something like below.</p>
+
+<p><img src="Capture.PNG" /></p>
+
+<p>As you can see, there is a white space between left div and right div. In the actual fact it should have red there because parent div's background color was set to red. So how to fix this problem. There are few ways we can solve this problem. Lets start with
+best and recommended solution.</p>
+
+<h2 id="solution1">Solution 1 - using psedo element :after</h2>
+
+<p>One solution for this problem is to use preudo element command called after in parent div. Now lets change the css and see result.</p>
+
+<pre class="jsCode">
+    .main:after {
+    content: " ";
+    display: table;
+    clear: both;
+    }
+</pre>
+
+<p>Let analyse the code. We added one virtual element using pseudo element which adds blank content as table and it clears itself. So it pushes down making the parent div stretching full. And it looks something like this.</p>
+
+<p><img src="Capture2.PNG" /></p>
+
+<h2 id="solution2">Solution 2 - adding additional div inside parent div as last child and some css</h2>
+<p>Now lets try to solve the same problem with different approach. Lets add one additional div and apply the same css to this div we did for :after pseudo element and it will give the same result. However this is not the ideal solution as you  had to add
+additional html and css where as solution 1 you could solve it with just css.</p>
+
+<p>Here is HTML and CSS code snippet.</p>
+
+<pre class="jsCode">
+    &lt;div class="separator"&gt;&lt;/div&gt;
+</pre>
+
+<pre class="jsCode">
+    .separator {
+    content: " ";
+    display: table;
+    clear: both;
+}
+</pre>
+
+<h2 id="solution3">Solution3 - with overflow hidden css on parent div</h2>
+<p>This can be solved by adding the following css. This is also not ideal solution as overflow: hidden does not fit the original purpose however solves the problem.</p>
+
+<pre class="jsCode">
+    .main {
+        overflow: hidden;
+    }
+</pre>
+</body>
+</html>

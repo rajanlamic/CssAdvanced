@@ -1,0 +1,21 @@
+.outer {
+    width: 100%;
+    background-color: red;
+    color: #fff;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+.outer .inner {
+    background-color: green;
+    width: 50%;
+    clear: both;
+}
+
+.outer:after {
+    content: " ";
+    display: table;
+    clear: both;
+ }
